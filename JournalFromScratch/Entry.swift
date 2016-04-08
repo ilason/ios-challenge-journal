@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Entry {
+class Entry: Equatable {
     private let kTimestamp = "timestamp"
     private let kTitle = "title"
     private let kText = "text"
@@ -43,4 +43,8 @@ class Entry {
         ]
         return dictionary
     }
+}
+
+func ==(lhs: Entry, rhs: Entry) -> Bool {
+    return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
 }
