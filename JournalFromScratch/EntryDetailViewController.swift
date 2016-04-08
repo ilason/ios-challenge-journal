@@ -8,12 +8,52 @@
 
 import UIKit
 
-class EntryDetailViewController: UIViewController {
+class EntryDetailViewController: UIViewController, UITextFieldDelegate {
+    
+    
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var entryTextField: UITextView!
+    
+    
+    var entry: Entry?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+    }
+    @IBAction func saveButtonTapped(sender: AnyObject) {
+        if let entry = self.entry {
+            entry.title = titleTextField.text!
+            entry.text = entryTextField.text
+            entry.timestamp = NSDate()
+            
+        } else {
+            let newEntry = Entry(title: self.titleTextField.text!, text: self.entryTextField.text)
+            EntryController.sharedInstance.addEntry(newEntry)
+            self.entry = newEntry
+        }
+        self.navigationController?.popViewControllerAnimated(true)
+        
+        
+        
+    }
+    @IBAction func clearButtonTapped(sender: AnyObject) {
+        titleTextField.text = ""
+        entryTextField.text = ""
+        
+        
+    }
+    
+    func updateWithEntry(entry: Entry) {
+        self.entry = entry
+        self.titleTextField.text = entry.title
+        self.entryTextField.text = entry.text
+        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +62,6 @@ class EntryDetailViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }

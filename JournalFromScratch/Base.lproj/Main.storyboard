@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5cE-27-5EB">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Entry List Table View Controller-->
@@ -14,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="W8A-mc-QLP">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="entryCell" id="W8A-mc-QLP">
                                 <rect key="frame" x="0.0" y="92" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W8A-mc-QLP" id="tiS-Gg-0bp">
@@ -31,7 +32,7 @@
                     <navigationItem key="navigationItem" id="Uka-FK-KVe">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="boS-mL-Ri1">
                             <connections>
-                                <segue destination="xr6-9q-uSI" kind="show" id="oCX-WP-TYb"/>
+                                <segue destination="xr6-9q-uSI" kind="show" identifier="toEditEntry" id="oCX-WP-TYb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -52,8 +53,46 @@
                     <view key="view" contentMode="scaleToFill" id="oLf-CK-AXx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Text Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nqC-HA-NAZ">
+                                <rect key="frame" x="20" y="109" width="374" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Enter Entry" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lON-6M-am7">
+                                <rect key="frame" x="20" y="154" width="374" height="243"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sm7-ZV-t66">
+                                <rect key="frame" x="20" y="405" width="82" height="49"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="xr6-9q-uSI" eventType="touchUpInside" id="Lgf-U5-qp1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCc-BQ-Q7t">
+                                <rect key="frame" x="312" y="405" width="82" height="49"/>
+                                <state key="normal" title="Clear">
+                                    <color key="titleColor" red="1" green="0.049890222319999997" blue="0.13349902559999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearButtonTapped:" destination="xr6-9q-uSI" eventType="touchUpInside" id="SDZ-D4-9xo"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="nqC-HA-NAZ" secondAttribute="trailing" id="eA8-dt-7d1"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="nqC-HA-NAZ" secondAttribute="leading" id="hLT-TX-aOL"/>
+                            <constraint firstItem="nqC-HA-NAZ" firstAttribute="top" secondItem="F6m-RD-pAq" secondAttribute="bottom" constant="45" id="ufb-tM-XUw"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="entryTextField" destination="lON-6M-am7" id="Y48-aL-lf2"/>
+                        <outlet property="titleTextField" destination="nqC-HA-NAZ" id="bhs-n1-A4c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBn-Si-fAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
