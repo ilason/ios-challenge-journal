@@ -22,6 +22,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="xr6-9q-uSI" kind="show" identifier="toEditEntry" id="tdi-cM-gI8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -32,7 +35,7 @@
                     <navigationItem key="navigationItem" id="Uka-FK-KVe">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="boS-mL-Ri1">
                             <connections>
-                                <segue destination="xr6-9q-uSI" kind="show" identifier="toEditEntry" id="oCX-WP-TYb"/>
+                                <segue destination="xr6-9q-uSI" kind="show" identifier="toAddEntry" id="oCX-WP-TYb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -118,4 +121,7 @@
             <point key="canvasLocation" x="277" y="376"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="oCX-WP-TYb"/>
+    </inferredMetricsTieBreakers>
 </document>
