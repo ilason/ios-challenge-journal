@@ -18,10 +18,12 @@ class EntryController {
     
     init() {
         self.entries = []
+        self.loadFromPersistentStorage()
     }
     
     func addEntry(entry: Entry) {
         entries.append(entry)
+        self.saveToPersistentStorage()
         
     }
     
@@ -30,4 +32,16 @@ class EntryController {
             entries.removeAtIndex(entryIndex)
         }        
     }
+    
+    func loadFromPersistentStorage() {
+        let entryDictionariesFromDefaults = NSUserDefaults.standardUserDefaults().objectForKey(entriesKey) as? [[String: AnyObject]]
+        
+        if let entryDictionaries = entryDictionariesFromDefaults {
+            self.entries = entryDictionaries.map({Entry(dictionary: $0)!})
+        }
+    }
+        func saveToPersistentStorage() {
+            let entryDictionaries = self.entries.map({$0.dictionaryCopy})
+            NSUserDefaults.standardUserDefaults().setObject(entryDictionaries, forKey: entriesKey)
+        }
 }
